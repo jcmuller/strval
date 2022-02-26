@@ -1,0 +1,11 @@
+bam.bar.bar: baz
+bam.foo: oi
+bam: baz
+bar: 123
+barbaz.bar: barr
+barbaz.oi: vey
+baz: bar
+baz: baz
+baz: foo
+foo.bar.bar: bar!
+foo.bar.baz: 123

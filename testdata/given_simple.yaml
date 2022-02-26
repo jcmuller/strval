@@ -1,0 +1,22 @@
+---
+foo:
+  bar:
+    baz: 123
+    bar: bar!
+
+bar: 123
+
+baz:
+  - foo
+  - bar
+  - baz
+
+barbaz:
+  oi: vey
+  bar: barr
+
+bam:
+  - foo: oi
+  - bar:
+      bar: baz
+  - baz
