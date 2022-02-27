@@ -6,12 +6,10 @@ import (
 	"strings"
 )
 
-func Marshal(in map[string]interface{}) ([]byte, error) {
+func Marshal(in interface{}) ([]byte, error) {
 	acc := make([]string, 0, 10)
-	for k, v := range in {
-		if err := processValue(k, v, &acc); err != nil {
-			return nil, err
-		}
+	if err := processValue("", in, &acc); err != nil {
+		return nil, err
 	}
 
 	sort.Strings(acc)
@@ -39,8 +37,7 @@ func processValue(prefix string, v interface{}, acc *[]string) error {
 
 func processMap(prefix string, vv map[string]interface{}, acc *[]string) error {
 	for k, v := range vv {
-		prefix := prefix + "." + k
-		if err := processValue(prefix, v, acc); err != nil {
+		if err := processValue(augmentPrefix(prefix, k), v, acc); err != nil {
 			return err
 		}
 	}
@@ -56,4 +53,12 @@ func processSlice(prefix string, vv []interface{}, acc *[]string) error {
 	}
 
 	return nil
+}
+
+func augmentPrefix(base, add string) string {
+	if base == "" {
+		return add
+	}
+
+	return base + "." + add
 }
