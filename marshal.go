@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/go-multierror"
 )
 
+// Marshal marshals input data into strval
 func Marshal(in interface{}) ([]byte, error) {
 	acc := make([]string, 0, 10)
 	if err := processValue("", in, &acc); err != nil {
