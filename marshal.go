@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+
+	"github.com/hashicorp/go-multierror"
 )
 
 func Marshal(in interface{}) ([]byte, error) {
@@ -36,20 +38,30 @@ func processValue(prefix string, v interface{}, acc *[]string) error {
 }
 
 func processMap(prefix string, vv map[string]interface{}, acc *[]string) error {
+	var errs error
 	for k, v := range vv {
 		if err := processValue(augmentPrefix(prefix, k), v, acc); err != nil {
-			return err
+			errs = multierror.Append(errs, err)
 		}
+	}
+
+	if errs != nil {
+		return errs
 	}
 
 	return nil
 }
 
 func processSlice(prefix string, vv []interface{}, acc *[]string) error {
+	var errs error
 	for _, v := range vv {
 		if err := processValue(prefix, v, acc); err != nil {
-			return err
+			errs = multierror.Append(errs, err)
 		}
+	}
+
+	if errs != nil {
+		return errs
 	}
 
 	return nil
