@@ -2,6 +2,8 @@ package strval_test
 
 import (
 	"embed"
+	"fmt"
+	"log"
 	"testing"
 
 	strval "github.com/jcmuller/strval"
@@ -45,4 +47,37 @@ func TestMarshal(t *testing.T) {
 			}
 		})
 	}
+}
+
+func ExampleMarshal() {
+	given, err := testdata.ReadFile("testdata/given_simple.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	values := make(map[string]interface{})
+	err = yaml.Unmarshal(given, &values)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	actual, err := strval.Marshal(values)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(actual))
+
+	// Output:
+	// bam.bar.bar: baz
+	// bam.foo: oi
+	// bam: baz
+	// bar: 123
+	// barbaz.bar: barr
+	// barbaz.oi: vey
+	// baz: bar
+	// baz: baz
+	// baz: foo
+	// foo.bar.bar: bar!
+	// foo.bar.baz: 123
 }
