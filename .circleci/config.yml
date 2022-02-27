@@ -38,7 +38,7 @@ jobs:
             - "/go/pkg/mod"
 workflows:
   version: 2
-  build-workflow:
+  run:
     jobs:
       - test
       - lint
