@@ -1,19 +1,33 @@
 # strval
 
-Simple strval marshaller
+Simple strval marshaller. It sorts the output, too. Arrays are
+unmarshalled in such a way that they are multiple keys with the same
+name, so the output is not valid YAML.
 
 ## Example
 
 ```golang
-// d is a []byte
-var data map[string]interface{}
-if e := yaml.Unmarshal(d, &data); e != nil {
-  log.Fatal(e)
-}
+//go:embed testdata/*
+var testdata embed.FS
 
-out, e := strval.Marshal(data)
-if e != nil {
-  log.Fatal(e)
+func main() {
+	given, err := testdata.ReadFile("testdata/given_simple.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	values := make(map[string]interface{})
+	err = yaml.Unmarshal(given, &values)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	actual, err := strval.Marshal(values)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(actual))
 }
 ```
 
@@ -48,7 +62,7 @@ bam:
 ```
 
 ```
-$ strval <testdata/given_simple.yaml
+$ go run .
 bam.bar.bar: baz
 bam.foo: oi
 bam: baz
