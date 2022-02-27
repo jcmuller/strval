@@ -7,40 +7,85 @@ Simple strval marshaller. It sorts the output, too. Arrays are
 unmarshalled in such a way that they are multiple keys with the same
 name, so the output is not valid YAML.
 
-## Example
+## Examples
+
+### As a library
+
+```shell
+$ go get github.com/jcmuller/strval/cmd/strval
+```
 
 ```golang
-//go:embed testdata/*
-var testdata embed.FS
+package main
+
+import (
+	"fmt"
+	"io"
+	"log"
+	"os"
+
+	"github.com/jcmuller/strval"
+	"gopkg.in/yaml.v3"
+)
 
 func main() {
-	given, err := testdata.ReadFile("testdata/given_simple.yaml")
+	d, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	values := make(map[string]interface{})
-	err = yaml.Unmarshal(given, &values)
-	if err != nil {
-		log.Fatal(err)
+	var data map[string]interface{}
+	if e := yaml.Unmarshal(d, &data); e != nil {
+		log.Fatal(e)
 	}
 
-	actual, err := strval.Marshal(values)
-	if err != nil {
-		log.Fatal(err)
+	out, e := strval.Marshal(data)
+	if e != nil {
+		log.Fatal(e)
 	}
 
-	fmt.Println(string(actual))
+	fmt.Printf("%s\n", out)
 }
 ```
 
-```
-$ go install github.com/jcmuller/strval/cmd/strval@latest
+```shell
+$ go run .
+bam.bar.bar: baz
+bam.foo: oi
+bam: baz
+bar: 123
+barbaz.bar: barr
+barbaz.oi: vey
+baz: bar
+baz: baz
+baz: foo
+foo.bar.bar: bar!
+foo.bar.baz: 123
 ```
 
+### As binary
+
+```shell
+$ go install github.com/jcmuller/strval/cmd/strval@latest
+$ strval <testdata/given_simple.yaml
+bam.bar.bar: baz
+bam.foo: oi
+bam: baz
+bar: 123
+barbaz.bar: barr
+barbaz.oi: vey
+baz: bar
+baz: baz
+baz: foo
+foo.bar.bar: bar!
+foo.bar.baz: 123
 ```
-$ cat testdata/given_simple.yaml
+
+### Test data
+
+```yaml
 ---
+# testdata/given_simple.yaml
 foo:
   bar:
     baz: 123
@@ -62,19 +107,4 @@ bam:
   - bar:
       bar: baz
   - baz
-```
-
-```
-$ go run .
-bam.bar.bar: baz
-bam.foo: oi
-bam: baz
-bar: 123
-barbaz.bar: barr
-barbaz.oi: vey
-baz: bar
-baz: baz
-baz: foo
-foo.bar.bar: bar!
-foo.bar.baz: 123
 ```
