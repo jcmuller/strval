@@ -4,7 +4,7 @@ foo:
     baz: 123
     bar: bar!
 
-bar: 123
+bar: 123.45
 
 baz:
   - foo

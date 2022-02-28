@@ -72,7 +72,7 @@ func ExampleMarshal() {
 	// bam.bar.bar: baz
 	// bam.foo: oi
 	// bam: baz
-	// bar: 123
+	// bar: 123.45
 	// barbaz.bar: barr
 	// barbaz.oi: vey
 	// baz: bar
