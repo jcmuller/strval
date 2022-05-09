@@ -21,7 +21,7 @@ func Marshal(in interface{}) ([]byte, error) {
 
 func processValue(prefix string, v interface{}, acc *[]string) error {
 	switch vv := v.(type) {
-	case string, int, float64:
+	case string, int, float64, bool:
 		*acc = append(*acc, fmt.Sprintf("%s: %v", prefix, vv))
 	case map[string]interface{}:
 		if err := processMap(prefix, vv, acc); err != nil {

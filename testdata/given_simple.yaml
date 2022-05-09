@@ -10,6 +10,8 @@ baz:
   - foo
   - bar
   - baz
+  - false
+  - true
 
 barbaz:
   oi: vey

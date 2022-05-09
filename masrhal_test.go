@@ -77,7 +77,9 @@ func ExampleMarshal() {
 	// barbaz.oi: vey
 	// baz: bar
 	// baz: baz
+	// baz: false
 	// baz: foo
+	// baz: true
 	// foo.bar.bar: bar!
 	// foo.bar.baz: 123
 }
