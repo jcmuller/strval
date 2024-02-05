@@ -1,7 +1,7 @@
 # strval
 
 [![Go Reference](https://pkg.go.dev/badge/git.sr.ht/~jcmuller/strval.svg)](https://pkg.go.dev/git.sr.ht/~jcmuller/strval)
-[![CircleCI](https://circleci.com/gh/jcmuller/strval/tree/main.svg?style=svg)](https://circleci.com/gh/jcmuller/strval/tree/main)
+[![builds.sr.ht status](https://builds.sr.ht/~jcmuller/strval.svg)](https://builds.sr.ht/~jcmuller/strval)
 
 Simple strval marshaller. It sorts the output, too. Arrays are
 unmarshalled in such a way that they are multiple keys with the same
