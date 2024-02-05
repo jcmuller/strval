@@ -1,4 +1,4 @@
-module github.com/jcmuller/strval
+module git.sr.ht/~jcmuller/strval
 
 go 1.21
 

@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jcmuller/strval"
+	"git.sr.ht/~jcmuller/strval"
 	"gopkg.in/yaml.v3"
 )
 

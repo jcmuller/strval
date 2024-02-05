@@ -1,6 +1,6 @@
 # strval
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/jcmuller/strval.svg)](https://pkg.go.dev/github.com/jcmuller/strval)
+[![Go Reference](https://pkg.go.dev/badge/git.sr.ht/~jcmuller/strval.svg)](https://pkg.go.dev/git.sr.ht/~jcmuller/strval)
 [![CircleCI](https://circleci.com/gh/jcmuller/strval/tree/main.svg?style=svg)](https://circleci.com/gh/jcmuller/strval/tree/main)
 
 Simple strval marshaller. It sorts the output, too. Arrays are
@@ -12,7 +12,7 @@ name, so the output is not valid YAML.
 ### As a library
 
 ```shell
-$ go get github.com/jcmuller/strval/cmd/strval
+$ go get git.sr.ht/~jcmuller/strval/cmd/strval
 ```
 
 ```golang
@@ -24,7 +24,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jcmuller/strval"
+	"git.sr.ht/~jcmuller/strval"
 	"gopkg.in/yaml.v3"
 )
 
@@ -66,7 +66,7 @@ foo.bar.baz: 123
 ### As binary
 
 ```shell
-$ go install github.com/jcmuller/strval/cmd/strval@latest
+$ go install git.sr.ht/~jcmuller/strval/cmd/strval@latest
 $ strval <testdata/given_simple.yaml
 bam.bar.bar: baz
 bam.foo: oi

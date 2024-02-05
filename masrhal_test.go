@@ -6,7 +6,7 @@ import (
 	"log"
 	"testing"
 
-	strval "github.com/jcmuller/strval"
+	strval "git.sr.ht/~jcmuller/strval"
 	_assert "github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )
