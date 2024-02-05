@@ -1,6 +1,6 @@
 module github.com/jcmuller/strval
 
-go 1.17
+go 1.21
 
 require (
 	github.com/hashicorp/go-multierror v1.1.1
