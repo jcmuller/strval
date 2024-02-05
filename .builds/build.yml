@@ -7,7 +7,7 @@ sources:
   - https://git.sr.ht/~jcmuller/strval
 
 artifacts:
-  - strval/tmp/output/coverage.html
+  - strval/tmp/output/coverage/coverage.html
 
 tasks:
   - lint: |
@@ -16,7 +16,7 @@ tasks:
 
   - test: |
       cd strval
-      make coverage
+      make test
 
 triggers:
   - condition: failure
