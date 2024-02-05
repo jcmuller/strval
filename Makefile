@@ -4,14 +4,15 @@ all: test
 .PHONY: test
 test: install-gotestsum
 	@mkdir -p tmp/output/results tmp/output/coverage
-	@gotestsum \
+	@bin/gotestsum \
 		--junitfile tmp/output/results/unit-tests.xml \
+		--post-run-command "make coverage" \
 		-- \
 		-coverprofile=tmp/output/coverage/coverage.out \
 		./...
 
 .PHONY: coverage
-coverage: test
+coverage:
 	@go tool cover \
 		-html=tmp/output/coverage/coverage.out \
 		-o tmp/output/coverage/coverage.html
@@ -26,12 +27,12 @@ vet: fmt
 
 .PHONY: test
 lint: vet install-golang-ci-lint
-	@golangci-lint run
+	@bin/golangci-lint run
 
 .PHONY: install-golang-ci-lint
 install-golang-ci-lint:
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	@GOBIN=$(PWD)/bin go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 .PHONY: install-gotestsum
 install-gotestsum:
-	@go install gotest.tools/gotestsum@latest
+	@GOBIN=$(PWD)/bin go install gotest.tools/gotestsum@latest

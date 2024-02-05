@@ -6,7 +6,7 @@ import (
 	"log"
 	"testing"
 
-	strval "github.com/jcmuller/strval"
+	strval "git.sr.ht/~jcmuller/strval"
 	_assert "github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 )
@@ -34,7 +34,7 @@ func TestMarshal(t *testing.T) {
 			given, err := testdata.ReadFile(tt.given)
 			assert.NoError(err)
 
-			values := make(map[string]interface{})
+			values := make(map[string]any)
 			err = yaml.Unmarshal(given, &values)
 			assert.NoError(err)
 
@@ -55,7 +55,7 @@ func ExampleMarshal() {
 		log.Fatal(err)
 	}
 
-	values := make(map[string]interface{})
+	values := make(map[string]any)
 	err = yaml.Unmarshal(given, &values)
 	if err != nil {
 		log.Fatal(err)

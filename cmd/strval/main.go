@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jcmuller/strval"
+	"git.sr.ht/~jcmuller/strval"
 	"gopkg.in/yaml.v3"
 )
 
@@ -16,7 +16,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var data map[string]interface{}
+	var data map[string]any
 	if e := yaml.Unmarshal(d, &data); e != nil {
 		log.Fatal(e)
 	}

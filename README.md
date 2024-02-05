@@ -1,7 +1,8 @@
 # strval
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/jcmuller/strval.svg)](https://pkg.go.dev/github.com/jcmuller/strval)
-[![CircleCI](https://circleci.com/gh/jcmuller/strval/tree/main.svg?style=svg)](https://circleci.com/gh/jcmuller/strval/tree/main)
+[![Go Reference](https://pkg.go.dev/badge/git.sr.ht/~jcmuller/strval.svg)](https://pkg.go.dev/git.sr.ht/~jcmuller/strval)
+[![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![builds.sr.ht status](https://builds.sr.ht/~jcmuller/strval.svg)](https://builds.sr.ht/~jcmuller/strval)
 
 Simple strval marshaller. It sorts the output, too. Arrays are
 unmarshalled in such a way that they are multiple keys with the same
@@ -12,7 +13,7 @@ name, so the output is not valid YAML.
 ### As a library
 
 ```shell
-$ go get github.com/jcmuller/strval/cmd/strval
+$ go get git.sr.ht/~jcmuller/strval/cmd/strval
 ```
 
 ```golang
@@ -24,7 +25,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jcmuller/strval"
+	"git.sr.ht/~jcmuller/strval"
 	"gopkg.in/yaml.v3"
 )
 
@@ -34,7 +35,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var data map[string]interface{}
+	var data map[string]any
 	if e := yaml.Unmarshal(d, &data); e != nil {
 		log.Fatal(e)
 	}
@@ -66,7 +67,7 @@ foo.bar.baz: 123
 ### As binary
 
 ```shell
-$ go install github.com/jcmuller/strval/cmd/strval@latest
+$ go install git.sr.ht/~jcmuller/strval/cmd/strval@latest
 $ strval <testdata/given_simple.yaml
 bam.bar.bar: baz
 bam.foo: oi

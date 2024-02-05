@@ -1,0 +1,24 @@
+---
+image: archlinux
+packages:
+  - go
+
+sources:
+  - https://git.sr.ht/~jcmuller/strval
+
+artifacts:
+  - strval/tmp/output/coverage/coverage.html
+
+tasks:
+  - lint: |
+      cd strval
+      make lint
+
+  - test: |
+      cd strval
+      make test
+
+triggers:
+  - condition: failure
+    action: email
+    to: "Juan C. Müller <strval@juancmuller.com>"
