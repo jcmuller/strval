@@ -1,6 +1,7 @@
 # strval
 
 [![Go Reference](https://pkg.go.dev/badge/git.sr.ht/~jcmuller/strval.svg)](https://pkg.go.dev/git.sr.ht/~jcmuller/strval)
+[![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![builds.sr.ht status](https://builds.sr.ht/~jcmuller/strval.svg)](https://builds.sr.ht/~jcmuller/strval)
 
 Simple strval marshaller. It sorts the output, too. Arrays are
