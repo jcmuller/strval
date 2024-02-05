@@ -9,7 +9,7 @@ import (
 )
 
 // Marshal marshals input data into strval
-func Marshal(in interface{}) ([]byte, error) {
+func Marshal(in any) ([]byte, error) {
 	acc := make([]string, 0, 10)
 	if err := processValue("", in, &acc); err != nil {
 		return nil, err
@@ -19,13 +19,13 @@ func Marshal(in interface{}) ([]byte, error) {
 	return []byte(strings.Join(acc, "\n")), nil
 }
 
-func processValue(prefix string, v interface{}, acc *[]string) error {
+func processValue(prefix string, v any, acc *[]string) error {
 	switch vv := v.(type) {
-	case map[string]interface{}:
+	case map[string]any:
 		if err := processMap(prefix, vv, acc); err != nil {
 			return err
 		}
-	case []interface{}:
+	case []any:
 		if err := processSlice(prefix, vv, acc); err != nil {
 			return err
 		}
@@ -36,7 +36,7 @@ func processValue(prefix string, v interface{}, acc *[]string) error {
 	return nil
 }
 
-func processMap(prefix string, vv map[string]interface{}, acc *[]string) error {
+func processMap(prefix string, vv map[string]any, acc *[]string) error {
 	var errs error
 	for k, v := range vv {
 		if err := processValue(augmentPrefix(prefix, k), v, acc); err != nil {
@@ -51,7 +51,7 @@ func processMap(prefix string, vv map[string]interface{}, acc *[]string) error {
 	return nil
 }
 
-func processSlice(prefix string, vv []interface{}, acc *[]string) error {
+func processSlice(prefix string, vv []any, acc *[]string) error {
 	var errs error
 	for _, v := range vv {
 		if err := processValue(prefix, v, acc); err != nil {
